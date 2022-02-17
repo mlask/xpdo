@@ -7,6 +7,8 @@ eXtended PDO
 
 #### available methods:
 
+- ```$db->pquery(string $sql, ...$args): PDOStatement```  
+  returns PDOStatement with prepared query
 - ```$db->get_col(string $sql, [...$args]): mixed```  
   returns indexed array with single column of data (`...$args` for prepared query) or empty array `[]` if none
 - ```$db->get_row(string $sql, [...$args]): mixed```  
