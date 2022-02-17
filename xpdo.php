@@ -6,29 +6,29 @@
 
 class xPDO extends \PDO
 {
-	public function pquery (string $sql, array $args): \PDOStatement
+	public function pquery (string $sql, ...$args): \PDOStatement
 	{
 		($s = $this->prepare($sql))->execute($args);
 		return $s;
 	}
 	
-	public function get_col (string $sql, ...$args): mixed
+	public function get_col (string $sql, ...$args)
 	{
-		return array_column((!empty($args) ? $this->pquery($sql, $args) : $this->query($sql))->fetchAll(\PDO::FETCH_NUM) ?? [], 0);
+		return array_column((!empty($args) ? $this->pquery($sql, ...$args) : $this->query($sql))->fetchAll(\PDO::FETCH_NUM) ?? [], 0);
 	}
 	
-	public function get_row (string $sql, ...$args): mixed
+	public function get_row (string $sql, ...$args)
 	{
-		return (!empty($args) ? $this->pquery($sql, $args) : $this->query($sql))->fetch(\PDO::FETCH_ASSOC) ?? false;
+		return (!empty($args) ? $this->pquery($sql, ...$args) : $this->query($sql))->fetch(\PDO::FETCH_ASSOC) ?? false;
 	}
 	
-	public function get_array (string $sql, ...$args): mixed
+	public function get_array (string $sql, ...$args)
 	{
-		return (!empty($args) ? $this->pquery($sql, $args) : $this->query($sql))->fetchAll(\PDO::FETCH_ASSOC) ?? false;
+		return (!empty($args) ? $this->pquery($sql, ...$args) : $this->query($sql))->fetchAll(\PDO::FETCH_ASSOC) ?? false;
 	}
 	
-	public function get_field (string $sql, ...$args): mixed
+	public function get_field (string $sql, ...$args)
 	{
-		return (!empty($args) ? $this->pquery($sql, $args) : $this->query($sql))->fetch(\PDO::FETCH_NUM)[0] ?? false;
+		return (!empty($args) ? $this->pquery($sql, ...$args) : $this->query($sql))->fetch(\PDO::FETCH_NUM)[0] ?? false;
 	}
 }
